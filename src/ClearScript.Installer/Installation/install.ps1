@@ -9,4 +9,13 @@ $project.ProjectItems.Item("v8-ia32.pdb").Properties.Item("CopyToOutputDirectory
 $project.ProjectItems.Item("v8-x64.dll").Properties.Item("CopyToOutputDirectory").Value = 1
 $project.ProjectItems.Item("v8-x64.pdb").Properties.Item("CopyToOutputDirectory").Value = 1
 $project.ProjectItems.Item("v8-x64.pdb").Properties.Item("CopyToOutputDirectory").Value = 1
-$project.Object.References.Item('ClearScript.Installer').Remove()
+
+try{
+	if($project.Object.References.Item('ClearScript.Installer') -ne $null)
+	{	
+		$project.Object.References.Item('ClearScript.Installer').Remove();
+	}
+}
+catch{
+	#don't really care if this step failed.
+}
