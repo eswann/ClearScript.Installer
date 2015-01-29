@@ -9,6 +9,8 @@ FYI: This package has a version of ClearScript compiled against .Net 4.5 only.
 
 For Web Projects
 ================
+Clearscript will attempt to set the copy to output correctly in the case of a web project, but if this fails:
+
 For web projects, set the following on all ClearScripts/V8 dlls added to the project:
 Copy to Output Directory: Do not copy
 
