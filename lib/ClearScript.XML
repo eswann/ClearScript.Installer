@@ -1602,6 +1602,11 @@
             and removing global indentation.
             </remarks>
         </member>
+        <member name="P:Microsoft.ClearScript.ScriptEngine.DisableCaseInsensitivePropertyLookups">
+            <summary>
+            gets/sets the default property lookup behavior
+            </summary>
+        </member>
         <member name="P:Microsoft.ClearScript.ScriptEngine.AllowReflection">
             <summary>
             Controls whether script code is permitted to use reflection.
@@ -3602,6 +3607,12 @@
             Performs garbage collection.
             </summary>
             <param name="exhaustive"><c>True</c> to perform exhaustive garbage collection, <c>false</c> to favor speed over completeness.</param>
+        </member>
+        <member name="M:Microsoft.ClearScript.V8.V8ScriptEngine.WriteHeapSnapshot(System.String)">
+            <summary>
+            Performs a heap snapshot by the given name
+            </summary>
+            <param name="fileName">the name of the snapshot</param>
         </member>
         <member name="M:Microsoft.ClearScript.V8.V8ScriptEngine.Dispose(System.Boolean)">
             <summary>
