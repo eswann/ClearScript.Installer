@@ -17,9 +17,9 @@
         </dependencies>
     </metadata>
   <files>
-    <file src="bin\$configuration$\ClearScript.dll" target="lib\net45" />
-    <file src="bin\$configuration$\ClearScript.pdb" target="lib\net45" />
-    <file src="bin\$configuration$\ClearScript.xml" target="lib\net45" />
+    <file src="..\..\lib\ClearScript.dll" target="lib\net45" />
+    <file src="..\..\lib\ClearScript.pdb" target="lib\net45" />
+    <file src="..\..\lib\ClearScript.xml" target="lib\net45" />
     
     <file src="..\..\lib\ClearScriptV8-32.dll" target="content\" />
     <file src="..\..\lib\ClearScriptV8-32.pdb" target="content\" />
