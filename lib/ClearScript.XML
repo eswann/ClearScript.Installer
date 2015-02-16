@@ -1575,6 +1575,17 @@
             Gets the name associated with the script engine instance.
             </summary>
         </member>
+        <member name="P:Microsoft.ClearScript.ScriptEngine.Current">
+            <summary>
+            Gets the script engine that is invoking a host member on the current thread.
+            </summary>
+            <remarks>
+            If multiple script engines are invoking host members on the current thread, this
+            property gets the one responsible for the most deeply nested invocation. If no script
+            engines are invoking host members on the current thread, this property returns
+            <c>null</c>.
+            </remarks>
+        </member>
         <member name="P:Microsoft.ClearScript.ScriptEngine.FileNameExtension">
             <summary>
             Gets the script engine's recommended file name extension for script files.
@@ -1636,6 +1647,17 @@
             approach reduces type safety, but it may be useful for running legacy scripts that rely
             on the specific behavior of reflection-based method binding.
             </remarks>
+        </member>
+        <member name="P:Microsoft.ClearScript.ScriptEngine.EnableAutoHostVariables">
+            <summary>
+            Enables or disables automatic host variable tunneling for by-reference arguments to script functions and delegates.
+            </summary>
+            <remarks>
+            When this property is set to <c>true</c>, the script engine replaces by-reference
+            arguments to script functions and delegates with host variables, allowing script code
+            to simulate output arguments if the script language does not support them natively.
+            </remarks>
+            <seealso cref="M:Microsoft.ClearScript.HostFunctions.newVar``1(``0)"/>
         </member>
         <member name="P:Microsoft.ClearScript.ScriptEngine.ContinuationCallback">
             <summary>
@@ -1979,11 +2001,11 @@
         </member>
         <member name="M:Microsoft.ClearScript.HostFunctions.newArr``1(System.Int32[])">
             <summary>
-            Creates a host array.
+            Creates a host array with the specified element type.
             </summary>
             <typeparam name="T">The element type of the array to create.</typeparam>
             <param name="lengths">One or more integers representing the array dimension lengths.</param>
-            <returns>A new host array.</returns>
+            <returns>A new host array with the specified element type.</returns>
             <remarks>
             For information about the mapping between host members and script-callable properties
             and methods, see
@@ -1999,7 +2021,21 @@
             var array = host.newArr(StringT, 5, 3);
             </code>
             </example>
+            <seealso cref="M:Microsoft.ClearScript.HostFunctions.newArr(System.Int32[])"/>
             <seealso cref="M:Microsoft.ClearScript.ExtendedHostFunctions.type(System.String,System.Object[])"/>
+        </member>
+        <member name="M:Microsoft.ClearScript.HostFunctions.newArr(System.Int32[])">
+            <summary>
+            Creates a host array with <see cref="T:System.Object"/> as the element type.
+            </summary>
+            <param name="lengths">One or more integers representing the array dimension lengths.</param>
+            <returns>A new host array with <see cref="T:System.Object"/> as the element type.</returns>
+            <remarks>
+            For information about the mapping between host members and script-callable properties
+            and methods, see
+            <see cref="M:Microsoft.ClearScript.ScriptEngine.AddHostObject(System.String,Microsoft.ClearScript.HostItemFlags,System.Object)">AddHostObject</see>.
+            </remarks>
+            <seealso cref="M:Microsoft.ClearScript.HostFunctions.newArr``1(System.Int32[])"/>
         </member>
         <member name="M:Microsoft.ClearScript.HostFunctions.newVar``1(``0)">
             <summary>
@@ -2161,8 +2197,29 @@
             array = array.Select(selector).ToArray();
             </code>
             </example>
+            <seealso cref="M:Microsoft.ClearScript.HostFunctions.func(System.Int32,System.Object)"/>
             <seealso cref="M:Microsoft.ClearScript.ExtendedHostFunctions.type(System.String,System.Object[])"/>
             <seealso cref="M:Microsoft.ClearScript.ExtendedHostFunctions.type(System.String,System.String,System.Object[])"/>
+        </member>
+        <member name="M:Microsoft.ClearScript.HostFunctions.func(System.Int32,System.Object)">
+            <summary>
+            Creates a delegate that invokes a script function and returns its result value.
+            </summary>
+            <param name="argCount">The number of arguments to pass to the script function.</param>
+            <param name="scriptFunc">The script function for which to create a delegate.</param>
+            <returns>A new delegate that invokes the specified script function and returns its result value.</returns>
+            <remarks>
+            This function creates a delegate that accepts <paramref name="argCount"/> arguments and
+            returns the result of invoking <paramref name="scriptFunc"/>. The type of all
+            parameters and the return value is <see cref="T:System.Object"/>. Such a delegate is
+            often useful in strongly typed contexts because of
+            <see href="http://msdn.microsoft.com/en-us/library/ms173174(VS.80).aspx">contravariance</see>.
+            <para>
+            For information about the types of result values that script code can return, see
+            <see cref="M:Microsoft.ClearScript.ScriptEngine.Evaluate(System.String,System.Boolean,System.String)"/>.
+            </para>
+            </remarks>
+            <seealso cref="M:Microsoft.ClearScript.HostFunctions.func``1(System.Int32,System.Object)"/>
         </member>
         <member name="M:Microsoft.ClearScript.HostFunctions.typeOf``1">
             <summary>
